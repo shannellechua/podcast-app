@@ -56,5 +56,9 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'devise', '~> 4.9', '>= 4.9.4'
 #auth
+gem 'devise', '~> 4.9', '>= 4.9.4'
+
+
+# env api
+gem 'dotenv-rails'
