@@ -62,3 +62,5 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 
 # env api
 gem 'dotenv-rails'
+
+gem 'rspotify'

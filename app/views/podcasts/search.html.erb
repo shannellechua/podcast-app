@@ -1,0 +1,12 @@
+<%= form_with url: podcasts_path, method: :get, local: true do |form| %>
+  <%= form.label :search, "Search for Podcasts" %>
+  <%= form.text_field :search %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<% if @podcast.present? %>
+  <% @podcast.each do |pod| %>
+    <p>Publisher:<%= pod.publisher %></p>
+    <p>Name:<%= pod.name %></p>
+  <% end %>
+<% end %>
