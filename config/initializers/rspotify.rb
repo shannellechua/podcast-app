@@ -1,1 +1,1 @@
-RSpotify::authenticate("<your_spotify_client_id>", "<your_spotify_client_secret>")
+# RSpotify::authenticate("<your_spotify_client_id>", "<your_spotify_client_secret>")
