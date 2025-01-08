@@ -4,6 +4,10 @@ class ShowsController < ApplicationController
   def show
     @reviews = @show.reviews.includes(:user)
   end
+
+  def search
+    @shows = RSpotify::Show.search(params[:query]) 
+  end
   
   private
   

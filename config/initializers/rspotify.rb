@@ -1,1 +1,3 @@
-# RSpotify::authenticate("<your_spotify_client_id>", "<your_spotify_client_secret>")
+require 'rspotify'
+
+RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
