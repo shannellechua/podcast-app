@@ -6,7 +6,6 @@
 
 <% if @podcast.present? %>
   <% @podcast.each do |pod| %>
-    <p>Publisher:<%= pod.publisher %></p>
-    <p>Name:<%= pod.name %></p>
+    <a href="/podcasts/<%= pod.id %>">Name:<%= pod.name %></a>
   <% end %>
 <% end %>
