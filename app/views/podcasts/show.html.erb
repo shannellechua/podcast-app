@@ -1,1 +1,16 @@
-<h1><%= @episode.description %></h1>
+<h1>Title: <%= @episode.name %></h1>
+
+<h1>Image: <%= image_tag(@episode.images[0]["url"]) %></h1>
+
+<h1>Description: <%= @episode.description %></h1>
+
+<h1>Category: <%= @category.name %></h1>
+
+<h1>Audio Preview: <%= audio_tag(@episode.audio_preview_url, controls: true) %> </h1>
+
+<h1>Release Date: <%= @episode.release_date %></h1>
+
+<h1>Show: <%= @episode.show %></h1>
+
+<h1>Language: <%= I18nData.languages[@episode.language.upcase]%></h1>
+

@@ -64,3 +64,5 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'dotenv-rails'
 
 gem 'rspotify'
+
+gem 'i18n_data'
