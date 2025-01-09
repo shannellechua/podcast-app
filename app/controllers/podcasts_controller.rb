@@ -17,8 +17,8 @@ class PodcastsController < ApplicationController
   end
 
   def favorite
-    @episode = RSpotify::Episode.find(params[:episode_id])  # Changed from params[:id]
-    current_user.dummies.create(spotify_id: @episode.id)
+    @episode = RSpotify::Episode.find(params[:episode_id])  
+    current_user.dummies.create(spotify_id: @episode.id, name: @episode.name, show: @episode.show.name)
     redirect_to podcasts_path, notice: 'Episode added to favorites!'
   end
 end
