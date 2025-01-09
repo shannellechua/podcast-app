@@ -60,8 +60,7 @@ end
 gem 'devise'
 
 
-# env 
+# env api
 gem 'dotenv-rails'
 
-#rspotify
 gem 'rspotify'

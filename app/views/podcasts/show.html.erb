@@ -1,0 +1,37 @@
+<div class="podcast-details">
+  <h1><%= @episode.name %></h1>
+  
+  <div class="feedback-form">
+    <%= form_with(model: [:podcast, @feedback], url: podcast_feedbacks_path(@episode.id), local: true) do |f| %>
+      <div class="field">
+        <%= f.label :rating %>
+        <%= f.select :rating, options_for_select(1..5) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :comment %>
+        <%= f.text_area :comment %>
+      </div>
+
+      <%= f.submit "Submit Feedback" %>
+    <% end %>
+  </div>
+
+  <div class="existing-feedbacks">
+    <h3>Feedback</h3>
+    <% @feedbacks.each do |feedback| %>
+      <div class="feedback-item">
+        <p>Rating: <%= feedback.rating %>/5</p>
+        <p>Comment: <%= feedback.comment %></p>
+        <div class="feedback-actions">
+          <%= link_to 'Edit', edit_podcast_feedback_path(@episode, feedback), class: 'button' %>
+          <%= link_to 'Delete', 
+              podcast_feedback_path(@episode, feedback), 
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: 'button delete' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

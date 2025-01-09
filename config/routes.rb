@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   devise_for :users
   get "dashboard/index"
 
-  authenticated :user do
-    root 'dashboard#index', as: :authenticated_root
-  end
+  # authenticated :user do
+  #   root 'dashboard#index', as: :authenticated_root
+  # end
 
-  devise_scope :user do
-    root 'devise/sessions#new'
-  end
+  # devise_scope :user do
+  #   root 'devise/sessions#new'
+  # end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -19,11 +19,16 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  resources :shows do
-    collection do
-      get 'search'
-    end
-  end
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "podcasts#search"
+
+  get "/podcasts", to: "podcasts#search"
+
+  resources :podcasts do
+    collection do
+      get :search  # Keeps your existing search route
+    end
+    
+    resources :feedbacks, except: [:index, :new]  # Nests feedbacks under podcasts
+  end
 end
