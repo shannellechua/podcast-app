@@ -1,3 +1,11 @@
 <h1><%= @episode.name %></h1>
 
-<<%= button_to 'Add to Favorites', favorite_podcast_path(episode_id: @episode.id), method: :post %>
+<% if current_user.dummies.exists?(spotify_id: @episode.id) %>
+  <%= button_to 'Remove from Favorites', 
+              unfavorite_podcast_path(id: @episode.id), 
+              method: :delete %>
+<% else %>
+  <%= button_to 'Add to Favorites', 
+                favorite_podcast_path(@episode), 
+                method: :post  %>
+<% end %>
