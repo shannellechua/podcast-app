@@ -6,6 +6,6 @@
               method: :delete %>
 <% else %>
   <%= button_to 'Add to Favorites', 
-                favorite_podcast_path(@episode), 
+                favorite_podcast_path(episode_id: @episode.id),
                 method: :post  %>
 <% end %>
