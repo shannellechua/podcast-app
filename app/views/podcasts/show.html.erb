@@ -1,33 +1,31 @@
 <div class="podcast-details">
   <h1><%= @episode.name %></h1>
-
   <div class="player-container">
-    <iframe 
-      style="border-radius:12px" 
-      src="https://open.spotify.com/embed/episode/<%= @episode.id %>" 
-      width="100%" 
-      height="152" 
-      frameborder="0" 
-      allowfullscreen="" 
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+    <iframe
+      style="border-radius:12px"
+      src="https://open.spotify.com/embed/episode/<%= @episode.id %>"
+      width="100%"
+      height="152"
+      frameborder="0"
+      allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy">
     </iframe>
   </div>
  
   <div class="feedback-form">
-
-  <% if user_signed_in? %>
+    <% if user_signed_in? %>
       <p class="current-user">Commenting as: <span><%= current_user.email %></span></p>
     <% end %>
-
     <%= form_with(model: [:podcast, @feedback], url: podcast_feedbacks_path(@episode.id), local: true) do |f| %>
       <div class="field">
         <%= f.label :rating %>
         <div class="star-rating">
-         <% 5.downto(1) do |i| %>
+          <% 5.downto(1) do |i| %>
             <%= f.radio_button :rating, i, class: "star-input", id: "star#{i}" %>
             <%= label_tag "star#{i}", "★", class: "star-label" %>
-         <% end %>
+          <% end %>
+        </div>
       </div>
       <div class="field">
         <%= f.label :comment %>
@@ -42,16 +40,15 @@
   <div class="existing-feedbacks">
     <h3>Feedback</h3>
     <% @feedbacks.each do |feedback| %>
-       <div class="feedback-item">
-         <p class="rating">
-           <% feedback.rating.times do %>★<% end %>
-           <% (5 - feedback.rating).times do %>☆<% end %>
-         </p>
-          <p>Comment: <%= feedback.comment %></p>
-        </div>
+      <div class="feedback-item">
+        <p class="rating">
+          <% feedback.rating.times do %>★<% end %>
+          <% (5 - feedback.rating).times do %>☆<% end %>
+        </p>
+        <p>Comment: <%= feedback.comment %></p>
         <div class="feedback-actions">
-          <%= link_to 'Edit', 
-              edit_podcast_feedback_path(@episode.id, feedback), 
+          <%= link_to 'Edit',
+              edit_podcast_feedback_path(@episode.id, feedback),
               class: 'button' %>
           <%= link_to 'Delete',
               podcast_feedback_path(@episode.id, feedback),
