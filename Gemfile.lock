@@ -114,6 +114,12 @@ GEM
       railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.0)
+    faraday (2.12.2)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-net_http (3.4.0)
+      net-http (>= 0.5.0)
     ffi (1.17.1-aarch64-linux-gnu)
     ffi (1.17.1-arm-linux-gnu)
     ffi (1.17.1-arm64-darwin)
@@ -139,7 +145,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.9.0)
-    jwt (2.9.3)
+    jwt (2.10.1)
       base64
     language_server-protocol (3.17.0.3)
     listen (3.9.0)
@@ -383,6 +389,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.2.2)
   rails_live_reload (~> 0.3.4)
+  rspotify
   rubocop-rails-omakase
   selenium-webdriver
   sprockets-rails
