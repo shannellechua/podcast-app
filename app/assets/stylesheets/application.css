@@ -13,3 +13,234 @@
  *= require_tree .
  *= require_self
  */
+ /* Main container */
+.podcasts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 30px;
+    background-color: #f5f5f5;
+   }
+   
+   /* Podcast card */
+   .podcast-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+   }
+   
+   .podcast-card:hover {
+    transform: translateY(-5px);
+   }
+   
+   /* Podcast title */
+   .podcast-title {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2d3748;
+    text-decoration: none;
+    margin-bottom: 15px;
+    transition: color 0.2s;
+   }
+   
+   .podcast-title:hover {
+    color: #4a5568;
+   }
+   
+   /* Search form */
+   form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+   }
+   
+   input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin: 10px 0;
+   }
+   
+   input[type="submit"] {
+    background: #4a90e2;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+   }
+   
+   input[type="submit"]:hover {
+    background: #357abd;
+   }
+
+/* ----------show.html.erb---------- */
+
+   /* Main container */
+.podcast-details {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Podcast title */
+  .podcast-details h1 {
+    font-size: 2rem;
+    color: #2d3748;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #edf2f7;
+  }
+  
+  /* Player container */
+  .player-container {
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Current user display */
+  .current-user {
+    background: #f7fafc;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #4a5568;
+  }
+  
+  .current-user span {
+    font-weight: 600;
+    color: #2d3748;
+  }
+  
+  /* Feedback form */
+  .feedback-form {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+  }
+  
+  .field {
+    margin-bottom: 20px;
+  }
+  
+  .field label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #4a5568;
+  }
+  
+  .field select {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+  }
+  
+  .field textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  input[type="submit"] {
+    background: #4299e1;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  
+  input[type="submit"]:hover {
+    background: #3182ce;
+  }
+  
+  /* Existing feedbacks */
+  .existing-feedbacks {
+    margin-top: 30px;
+  }
+  
+  .existing-feedbacks h3 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 20px;
+  }
+  
+  .feedback-item {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .feedback-item p {
+    margin: 8px 0;
+    color: #4a5568;
+  }
+  
+  /* Feedback actions */
+  .feedback-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  
+  .button:not(.delete) {
+    background: #edf2f7;
+    color: #4a5568;
+  }
+  
+  .button:not(.delete):hover {
+    background: #e2e8f0;
+  }
+  
+  .button.delete {
+    background: #feb2b2;
+    color: #c53030;
+  }
+  
+  .button.delete:hover {
+    background: #fc8181;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .podcast-details {
+      padding: 15px;
+    }
+    
+    .podcast-details h1 {
+      font-size: 1.5rem;
+    }
+    
+    .feedback-form {
+      padding: 15px;
+    }
+  }

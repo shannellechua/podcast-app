@@ -12,6 +12,7 @@ class FeedbacksController < ApplicationController
     end
   end
 
+
   def edit
     @episode = RSpotify::Episode.find(@feedback.podcast_id)
   end

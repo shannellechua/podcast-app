@@ -23,3 +23,4 @@ class PodcastsController < ApplicationController
     RSpotify.authenticate("2f8aa0ea29914151ab35bb287be9749c", "ec3bea7b485b4a11bfe097b71b82fa37")
   end
 end
+

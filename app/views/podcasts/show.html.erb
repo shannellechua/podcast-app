@@ -1,18 +1,37 @@
 <div class="podcast-details">
   <h1><%= @episode.name %></h1>
-  
+
+#   <!Add Spotify Player %>
+  <div class="player-container">
+    <iframe 
+      style="border-radius:12px" 
+      src="https://open.spotify.com/embed/episode/<%= @episode.id %>" 
+      width="100%" 
+      height="152" 
+      frameborder="0" 
+      allowfullscreen="" 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+      loading="lazy">
+    </iframe>
+  </div>
+ 
   <div class="feedback-form">
+#    Username/email
+  <% if user_signed_in? %>
+      <p class="current-user">Commenting as: <span><%= current_user.email %></span></p>
+    <% end %>
+
     <%= form_with(model: [:podcast, @feedback], url: podcast_feedbacks_path(@episode.id), local: true) do |f| %>
       <div class="field">
         <%= f.label :rating %>
         <%= f.select :rating, options_for_select(1..5) %>
       </div>
-
       <div class="field">
         <%= f.label :comment %>
         <%= f.text_area :comment %>
       </div>
-
+     
+      <%= f.hidden_field :podcast_id, value: @episode.id %>
       <%= f.submit "Submit Feedback" %>
     <% end %>
   </div>
@@ -24,11 +43,12 @@
         <p>Rating: <%= feedback.rating %>/5</p>
         <p>Comment: <%= feedback.comment %></p>
         <div class="feedback-actions">
-          <%= link_to 'Edit', edit_podcast_feedback_path(@episode, feedback), class: 'button' %>
-          <%= link_to 'Delete', 
-              podcast_feedback_path(@episode, feedback), 
-              method: :delete,
-              data: { confirm: 'Are you sure?' },
+          <%= link_to 'Edit', 
+              edit_podcast_feedback_path(@episode.id, feedback), 
+              class: 'button' %>
+          <%= link_to 'Delete',
+              podcast_feedback_path(@episode.id, feedback),
+              data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
               class: 'button delete' %>
         </div>
       </div>
