@@ -244,3 +244,39 @@
       padding: 15px;
     }
   }
+
+  /* ----------star rating---------- */
+
+  .star-rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 3px;
+  }
+  
+  .star-input {
+    display: none;
+  }
+  
+  .star-label {
+    font-size: 25px;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .star-label:hover,
+  .star-label:hover ~ .star-label,
+  .star-input:checked ~ .star-label {
+    color: #ffd700;
+  }
+  
+  /* For displaying existing ratings */
+  .feedback-item .rating {
+    color: #ffd700;
+    font-size: 20px;
+  }
+  
+  /* Update your feedback display to use stars */
+  .feedback-item p.rating {
+    margin: 8px 0;
+  }
