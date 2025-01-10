@@ -67,3 +67,4 @@ gem 'dotenv-rails'
 gem 'rspotify'
 
 gem 'i18n_data'
+gem "tailwindcss-rails", "~> 3.1"

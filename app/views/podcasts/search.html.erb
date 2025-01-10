@@ -1,3 +1,7 @@
+<h1>Welcome <%= current_user.email %></h1>
+
+
+
 <%= form_with url: podcasts_path, method: :get, local: true do |form| %>
   <%= form.label :search, "Search for Podcasts" %>
   <%= form.text_field :search %>
@@ -7,7 +11,7 @@
 <% if @podcast.present? %>
   <% @podcast.each do |pod| %>
     <p>Name: <%= link_to pod.name, podcast_path(id: pod.id) %> </p> 
-    <p>Uri: <%= pod.uri %></p>
+    <p>Id: <%= pod.id %></p>
     <p>Description: <%= pod.description %></p>
   <% end %>
 <% end %>

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   resources :podcasts do
     collection do
-      get :search
+      get :search, :show, :episodes
     end
   end
 end

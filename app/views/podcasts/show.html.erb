@@ -1,5 +1,11 @@
 <h1>Title: <%= @episode.name %></h1>
 
+<h1>Show Name: <%= @episode.show.name %></h1>
+
+<h1>Publisher: <%= @episode.show.publisher %></h1>
+
+<h1>Id: <%= @episode.id %></h1>
+
 <h1>Image: <%= image_tag(@episode.images[0]["url"]) %></h1>
 
 <h1>Description: <%= @episode.description %></h1>
@@ -10,7 +16,7 @@
 
 <h1>Release Date: <%= @episode.release_date %></h1>
 
-<h1>Show: <%= @episode.show %></h1>
+<h1>Episodes: <%= link_to @episode.show.episodes.map(&:name), episodes_podcasts_path %> </h1> 
 
 <h1>Language: <%= I18nData.languages[@episode.language.upcase]%></h1>
 
