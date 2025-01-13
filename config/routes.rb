@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       get :search  # Keeps your existing search route
     end
     
-    resources :feedbacks, except: [:index, :new]  # Nests feedbacks under podcasts
+    resources :feedbacks
+  # Nests feedbacks under podcasts
   end
 end

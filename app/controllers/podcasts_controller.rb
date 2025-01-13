@@ -1,4 +1,5 @@
 class PodcastsController < ApplicationController
+  require 'i18n_data'
   before_action :authenticate_spotify
 
   def search
