@@ -58,8 +58,10 @@ group :test do
 end
 
 #auth
-gem 'devise', '~> 4.9', '>= 4.9.4'
+gem 'devise'
 
 
 # env api
 gem 'dotenv-rails'
+
+gem 'rspotify'
