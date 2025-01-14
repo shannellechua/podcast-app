@@ -28,6 +28,11 @@ Rails.application.routes.draw do
     collection do
       get :search  # Keeps your existing search route
     end
+
+    member do
+      post :favorite  
+      delete :unfavorite
+    end
     
     resources :feedbacks
   # Nests feedbacks under podcasts
