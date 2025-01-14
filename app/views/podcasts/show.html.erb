@@ -14,15 +14,15 @@
     </iframe>
   </div>
 
-  <%= button_to 'Add to Favorites', favorite_podcast_path(episode_id: @episode.id), method: :post %>
-    <% if current_user.episodes&.exists?(spotify_id: @episode.id) %>
-      <%= button_to 'Remove from Favorites', 
-                  unfavorite_podcast_path(id: @episode.id), 
-                  method: :delete %>
+  
+  <% if current_user.episodes&.exists?(spotify_id: @episode.id) %>
+    <%= button_to 'Remove from Favorites', 
+                unfavorite_podcast_path(id: @episode.id), 
+                method: :delete %>
     <% else %>
       <%= button_to 'Add to Favorites', 
-                    favorite_podcast_path(@episode), 
-                    method: :post  %>
+                  favorite_podcast_path(@episode), 
+                  method: :post  %>
   <% end %>
 
   <div class="episode-info">
