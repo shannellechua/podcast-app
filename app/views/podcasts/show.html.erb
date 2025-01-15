@@ -14,16 +14,43 @@
     </iframe>
   </div>
 
-  
-  <% if current_user.episodes&.exists?(spotify_id: @episode.id) %>
-    <%= button_to 'Remove from Favorites', 
-                unfavorite_podcast_path(id: @episode.id), 
-                method: :delete %>
+  <div class="podcast-actions">
+    <% if current_user.episodes&.exists?(spotify_id: @episode.id) %>
+      <%= button_to 'Remove from Favorites', 
+                  unfavorite_podcast_path(id: @episode.id), 
+                  method: :delete %>
+      
+      <% user_episode = current_user.episodes.find_by(spotify_id: @episode.id) %>
+      
+      <% if user_episode.played %>
+        <%= button_to 'Mark as Unplayed', 
+                    unplayed_podcast_path(id: @episode.id),
+                    method: :patch,
+                    class: 'status-button played' %>
+      <% else %>
+        <%= button_to 'Mark as Played', 
+                    played_podcast_path(id: @episode.id),
+                    method: :patch,
+                    class: 'status-button unplayed' %>
+      <% end %>
+
+      <% if user_episode.finished %>
+        <%= button_to 'Mark as Unfinished', 
+                    unfinished_podcast_path(id: @episode.id),
+                    method: :patch,
+                    class: 'status-button finished' %>
+      <% else %>
+        <%= button_to 'Mark as Finished', 
+                    finished_podcast_path(id: @episode.id),
+                    method: :patch,
+                    class: 'status-button unfinished' %>
+      <% end %>
     <% else %>
       <%= button_to 'Add to Favorites', 
-                  favorite_podcast_path(@episode), 
+                  favorite_podcast_path(episode_id: @episode.id),
                   method: :post  %>
-  <% end %>
+    <% end %>
+  </div>
 
   <div class="episode-info">
     <h2>Publisher: <span><%= @episode.show.publisher %></span></h2>

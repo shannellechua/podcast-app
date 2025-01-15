@@ -31,6 +31,34 @@ class PodcastsController < ApplicationController
     redirect_to podcasts_path, notice: 'Episode removed from favorites!'
   end
 
+  def played
+    @episode = RSpotify::Episode.find(params[:id])
+    episode_favorite = current_user.episodes.find_by(spotify_id: @episode.id)
+    episode_favorite.update(played: true) if episode_favorite
+    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode marked as played!')
+  end
+  
+  def unplayed
+    @episode = RSpotify::Episode.find(params[:id])
+    episode_favorite = current_user.episodes.find_by(spotify_id: @episode.id)
+    episode_favorite.update(played: false) if episode_favorite
+    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode marked as unplayed!')
+  end
+
+  def finished
+    @episode = RSpotify::Episode.find(params[:id])
+    episode_favorite = current_user.episodes.find_by(spotify_id: @episode.id)
+    episode_favorite.update(finished: true) if episode_favorite
+    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode marked as finished!')
+   end
+   
+   def unfinished
+    @episode = RSpotify::Episode.find(params[:id]) 
+    episode_favorite = current_user.episodes.find_by(spotify_id: @episode.id)
+    episode_favorite.update(finished: false) if episode_favorite
+    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode marked as unfinished!')
+   end
+
   private
 
   def authenticate_spotify
