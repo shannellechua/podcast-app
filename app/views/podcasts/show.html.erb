@@ -18,7 +18,8 @@
     <% if current_user.episodes&.exists?(spotify_id: @episode.id) %>
       <%= button_to 'Remove from Favorites', 
                   unfavorite_podcast_path(id: @episode.id), 
-                  method: :delete %>
+                  method: :delete,
+                   class: 'button' %>
       
       <% user_episode = current_user.episodes.find_by(spotify_id: @episode.id) %>
       
@@ -26,29 +27,30 @@
         <%= button_to 'Mark as Unplayed', 
                     unplayed_podcast_path(id: @episode.id),
                     method: :patch,
-                    class: 'status-button played' %>
+                    class: 'button' %>
       <% else %>
         <%= button_to 'Mark as Played', 
                     played_podcast_path(id: @episode.id),
                     method: :patch,
-                    class: 'status-button unplayed' %>
+                    class: 'button' %>
       <% end %>
 
       <% if user_episode.finished %>
         <%= button_to 'Mark as Unfinished', 
                     unfinished_podcast_path(id: @episode.id),
                     method: :patch,
-                    class: 'status-button finished' %>
+                    class: 'button' %>
       <% else %>
         <%= button_to 'Mark as Finished', 
                     finished_podcast_path(id: @episode.id),
                     method: :patch,
-                    class: 'status-button unfinished' %>
+                    class: 'button' %>
       <% end %>
     <% else %>
       <%= button_to 'Add to Favorites', 
                   favorite_podcast_path(episode_id: @episode.id),
-                  method: :post  %>
+                  method: :post,  
+                  class: 'button' %>
     <% end %>
   </div>
 
