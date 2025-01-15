@@ -32,4 +32,6 @@ Rails.application.routes.draw do
     resources :feedbacks
   # Nests feedbacks under podcasts
   end
+
+  resources :subscriptions
 end
