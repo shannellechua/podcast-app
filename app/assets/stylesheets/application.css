@@ -13,6 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+/* Login bar */
+
+.user-info {
+  text-align: center;
+  /* padding: 10px;
+  border-bottom: 1px solid #4299e1; */
+}
+
 /* Main container */
 .podcasts-grid {
   display: grid;
