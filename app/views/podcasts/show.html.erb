@@ -106,7 +106,7 @@
       <p class="current-user">Commenting as: <span><%= current_user.email %></span></p>
     <% end %>
 
-    <%= form_with(model: [:podcast, @feedback], url: podcast_feedbacks_path(@episode.id), local: true, class: "feedback-form") do |f| %>
+    <%= form_with(model: @feedback, url: podcast_feedbacks_path(@episode.id), local: true, class: "feedback-form") do |f| %>
       <div class="form-group">
         <%= f.label :rating %>
         <%= f.select :rating, options_for_select(1..5), class: "rating-select" %>
@@ -125,10 +125,11 @@
     <% @feedbacks.each do |feedback| %>
       <div class="feedback-item">
         <p><strong>Rating:</strong> <%= feedback.rating %>/5</p>
+        <p><strong>Commented by: <%= feedback.user&.email || "Anon" %></p>
         <p><strong>Comment:</strong> <%= feedback.comment %></p>
         <div class="feedback-actions">
           <%= link_to 'Edit', edit_podcast_feedback_path(@episode.id, feedback), class: 'button edit-button' %>
-          <%= link_to 'Delete', podcast_feedback_path(@episode.id, feedback), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'button delete-button' %>
+          <%= button_to 'Delete', podcast_feedback_path(@episode.id, feedback), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'button delete-button' %>
         </div>
       </div>
     <% end %>

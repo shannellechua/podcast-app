@@ -1,6 +1,6 @@
 <h2>Edit Feedback for <%= @episode.name %></h2>
 
-<%= form_with(model: @feedback, url: podcast_feedback_path(@feedback), method: :patch, local: true) do |f| %>
+<%= form_with(model: @feedback, url: podcast_feedback_path(@episode.id, @feedback), method: :patch, local: true) do |f| %>
   <div class="field">
     <%= f.label :rating %>
     <%= f.select :rating, options_for_select(1..5, @feedback.rating) %>
