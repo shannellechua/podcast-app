@@ -124,7 +124,9 @@
     <h3>Feedback</h3>
     <% @feedbacks.each do |feedback| %>
       <div class="feedback-item">
-        <p><strong>Rating:</strong> <%= feedback.rating %>/5</p>
+        <div>
+          <% feedback.rating.times do %>★<% end %><% (5 - feedback.rating).times do %>☆<% end %>
+        </div>
         <p><strong>Commented by: <%= feedback.user&.email || "Anon" %></p>
         <p><strong>Comment:</strong> <%= feedback.comment %></p>
         <div class="feedback-actions">
