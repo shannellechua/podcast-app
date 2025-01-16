@@ -2,17 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   get "dashboard/index"
 
-  # authenticated :user do
-  #   root 'dashboard#index', as: :authenticated_root
-  # end
-
-  # devise_scope :user do
-  #   root 'devise/sessions#new'
-  # end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/*
@@ -28,10 +17,23 @@ Rails.application.routes.draw do
     collection do
       get :search  # Keeps your existing search route
     end
+
+    member do
+      post :favorite  
+      delete :unfavorite
+      patch :played
+      patch :unplayed
+      patch :finished
+      patch :unfinished
+    end
     
     resources :feedbacks
   # Nests feedbacks under podcasts
   end
 
+<<<<<<< HEAD
   resources :subscriptions
+=======
+  get 'favorites', to: 'users#favorites', as: 'user_favorites'
+>>>>>>> main
 end

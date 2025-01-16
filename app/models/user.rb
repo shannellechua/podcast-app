@@ -4,5 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+<<<<<<< HEAD
   has_many :subscriptions
+=======
+  has_many :episodes
+>>>>>>> main
 end

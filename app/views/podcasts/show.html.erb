@@ -14,6 +14,7 @@
     </iframe>
   </div>
 
+<<<<<<< HEAD
   <% if user_signed_in? %>
   <% subscription = current_user.subscriptions.find_by(show_id: @episode.show.id) %>
   <% if subscription %>
@@ -25,6 +26,47 @@
   <p>You must <%= link_to "sign in", new_user_session_path %> to subscribe.</p>
 <% end %>
 
+=======
+  <div class="podcast-actions">
+    <% if current_user.episodes&.exists?(spotify_id: @episode.id) %>
+      <%= button_to 'Remove from Favorites', 
+                  unfavorite_podcast_path(id: @episode.id), 
+                  method: :delete,
+                   class: 'button' %>
+      
+      <% user_episode = current_user.episodes.find_by(spotify_id: @episode.id) %>
+      
+      <% if user_episode.played %>
+        <%= button_to 'Mark as Unplayed', 
+                    unplayed_podcast_path(id: @episode.id),
+                    method: :patch,
+                    class: 'button' %>
+      <% else %>
+        <%= button_to 'Mark as Played', 
+                    played_podcast_path(id: @episode.id),
+                    method: :patch,
+                    class: 'button' %>
+      <% end %>
+
+      <% if user_episode.finished %>
+        <%= button_to 'Mark as Unfinished', 
+                    unfinished_podcast_path(id: @episode.id),
+                    method: :patch,
+                    class: 'button' %>
+      <% else %>
+        <%= button_to 'Mark as Finished', 
+                    finished_podcast_path(id: @episode.id),
+                    method: :patch,
+                    class: 'button' %>
+      <% end %>
+    <% else %>
+      <%= button_to 'Add to Favorites', 
+                  favorite_podcast_path(episode_id: @episode.id),
+                  method: :post,  
+                  class: 'button' %>
+    <% end %>
+  </div>
+>>>>>>> main
 
   <div class="episode-info">
     <h2>Publisher: <span><%= @episode.show.publisher %></span></h2>
