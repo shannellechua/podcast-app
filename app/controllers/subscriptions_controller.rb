@@ -20,12 +20,12 @@ class SubscriptionsController < ApplicationController
   end
   
   def destroy
-    subscription = current_user.subscriptions.find_by(show_id: params[:show_id])
-    if subscription&.destroy
-      flash[:notice] = "Unsubscribed successfully!"
+    subscription = current_user.subscriptions.find(params[:id])
+    if subscription.destroy
+      flash[:notice] = "Unsubscribed successfully from #{subscription.show_name}."
     else
       flash[:alert] = "Failed to unsubscribe."
     end
-    redirect_back fallback_location: root_path
+    redirect_back(fallback_location: subscriptions_path)
   end
 end
