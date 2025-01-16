@@ -14,7 +14,6 @@
     </iframe>
   </div>
 
-<<<<<<< HEAD
   <% if user_signed_in? %>
   <% subscription = current_user.subscriptions.find_by(show_id: @episode.show.id) %>
   <% if subscription %>
@@ -26,7 +25,6 @@
   <p>You must <%= link_to "sign in", new_user_session_path %> to subscribe.</p>
 <% end %>
 
-=======
   <div class="podcast-actions">
     <% if current_user.episodes&.exists?(spotify_id: @episode.id) %>
       <%= button_to 'Remove from Favorites', 
@@ -66,7 +64,6 @@
                   class: 'button' %>
     <% end %>
   </div>
->>>>>>> main
 
   <div class="episode-info">
     <h2>Publisher: <span><%= @episode.show.publisher %></span></h2>
