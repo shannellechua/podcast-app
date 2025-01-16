@@ -30,4 +30,6 @@ Rails.application.routes.draw do
     resources :feedbacks
   # Nests feedbacks under podcasts
   end
+
+  get 'favorites', to: 'users#favorites', as: 'user_favorites'
 end
