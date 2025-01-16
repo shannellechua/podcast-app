@@ -14,6 +14,17 @@
     </iframe>
   </div>
 
+  <% if user_signed_in? %>
+  <% subscription = current_user.subscriptions.find_by(show_id: @episode.show.id) %>
+  <% if subscription %>
+    <%= button_to "Unsubscribe", subscription_path(show_id: @episode.show.id), method: :delete, class: "unsubscribe-button" %>
+  <% else %>
+    <%= button_to "Subscribe", subscriptions_path(show_id: @episode.show.id, show_name: @episode.show.name), method: :post, class: "subscribe-button" %>
+  <% end %>
+<% else %>
+  <p>You must <%= link_to "sign in", new_user_session_path %> to subscribe.</p>
+<% end %>
+
   <div class="podcast-actions">
     <% if current_user.episodes&.exists?(spotify_id: @episode.id) %>
       <%= button_to 'Remove from Favorites', 
@@ -60,7 +71,6 @@
     <h2>Description:</h2>
     <p><%= @episode.description %></p>
     <h2>Release Date: <span><%= @episode.release_date %></span></h2>
-    <h2>Episodes: <%= link_to @episode.show.episodes.map(&:name).join(", "), podcast_path %></h2>
   </div>
 
   <div class="feedback-form">
