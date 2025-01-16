@@ -376,6 +376,10 @@ input[type="submit"]:hover {
   /* border-bottom: 1px solid #4299e1; */
 }
 
+.align {
+  padding-left: 30px;
+}
+
 .podcasts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

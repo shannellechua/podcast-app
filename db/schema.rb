@@ -14,6 +14,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_14_115136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "dummies", force: :cascade do |t|
+    t.string "spotify_id"
+    t.string "name"
+    t.string "show"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.boolean "played"
+    t.boolean "finished"
+    t.index ["user_id"], name: "index_dummies_on_user_id"
+  end
+
   create_table "episodes", force: :cascade do |t|
     t.string "spotify_id"
     t.string "name"
@@ -63,6 +75,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_14_115136) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "dummies", "users"
   add_foreign_key "episodes", "users"
   add_foreign_key "subscriptions", "users"
 end
