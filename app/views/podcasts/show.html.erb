@@ -108,6 +108,9 @@
         </button>
       <% end %>
     </div>
+    <p class="mt-1 text-red-600 text-sm hidden" id="rating-error">
+      Please select a rating before submitting
+    </p>
   </div>
 
   <div>
@@ -159,11 +162,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function setRating(rating) {
     ratingInput.value = rating;
+    ratingError.classList.add('hidden'); 
     Array.from(stars).forEach((star, index) => {
       star.classList.toggle('text-yellow-400', index < rating);
       star.classList.toggle('text-gray-300', index >= rating);
     });
   }
+  
+  
 
   Array.from(stars).forEach(star => {
     star.addEventListener('click', function() {
