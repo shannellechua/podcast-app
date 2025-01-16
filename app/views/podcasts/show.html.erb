@@ -1,4 +1,23 @@
 <div class="podcast-details">
+
+  <div class="episode-status">
+    <% if user_signed_in? && (user_episode = current_user.episodes.find_by(spotify_id: @episode.id)) %>
+      <% if user_episode.played %>
+        <span class="status played">Played</span>
+      <% else %>
+        <span class="status unplayed">Not Played</span>
+      <% end %>
+
+      <% if user_episode.finished %>
+        <span class="status finished">Finished</span>
+      <% else %>
+        <span class="status unfinished">Not Finished</span>
+      <% end %>
+    <% else %>
+      <span class="status-message">Add to favorites to track status</span>
+    <% end %>
+  </div>
+
   <h1 class="episode-title"><%= @episode.name %></h1>
 
   <div class="player-container">
