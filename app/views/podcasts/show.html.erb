@@ -1,5 +1,37 @@
 <div class="podcast-details">
+  
+  <div class="episode-status">
+    <% if user_signed_in? && (user_episode = current_user.episodes.find_by(spotify_id: @episode.id)) %>
+      <% if user_episode.played %>
+        <span class="status played">Played</span>
+      <% else %>
+        <span class="status unplayed">Not Played</span>
+      <% end %>
+
+      <% if user_episode.finished %>
+        <span class="status finished">Finished</span>
+      <% else %>
+        <span class="status unfinished">Not Finished</span>
+      <% end %>
+    <% else %>
+      <span class="status none">Add to favorites to track status!</span>
+    <% end %>
+  </div>
+
   <h1 class="episode-title"><%= @episode.name %></h1>
+  <div class="subscribe-container">
+    <% if user_signed_in? %>
+      <% subscription = current_user.subscriptions.find_by(show_id: @episode.show.id) %>
+      <% if subscription %>
+        <%= button_to "Unsubscribe", subscription_path(show_id: @episode.show.id), method: :delete, class: "button" %>
+      <% else %>
+        <%= button_to "Subscribe", subscriptions_path(show_id: @episode.show.id, show_name: @episode.show.name), method: :post, class: "button" %>
+      <% end %>
+    <% else %>
+      <p>You must <%= link_to "sign in", new_user_session_path %> to subscribe.</p>
+    <% end %>
+    <h4><%= @episode.show.name %></h4>
+  </div>
 
   <div class="player-container">
     <iframe 
@@ -14,9 +46,11 @@
     </iframe>
   </div>
 
+  
+
   <div class="podcast-actions">
     <% if current_user.episodes&.exists?(spotify_id: @episode.id) %>
-      <%= button_to 'Remove from Favorites', 
+      <%= button_to '- Remove from Favorites', 
                   unfavorite_podcast_path(id: @episode.id), 
                   method: :delete,
                    class: 'button' %>
@@ -47,7 +81,7 @@
                     class: 'button' %>
       <% end %>
     <% else %>
-      <%= button_to 'Add to Favorites', 
+      <%= button_to '+ Add to Favorites', 
                   favorite_podcast_path(episode_id: @episode.id),
                   method: :post,  
                   class: 'button' %>
@@ -55,12 +89,10 @@
   </div>
 
   <div class="episode-info">
-    <h2>Publisher: <span><%= @episode.show.publisher %></span></h2>
     <h2>Language: <span><%= I18nData.languages[@episode.language.upcase] %></span></h2>
     <h2>Description:</h2>
     <p><%= @episode.description %></p>
     <h2>Release Date: <span><%= @episode.release_date %></span></h2>
-    <h2>Episodes: <%= link_to @episode.show.episodes.map(&:name).join(", "), podcast_path %></h2>
   </div>
 
   <div class="feedback-form">
