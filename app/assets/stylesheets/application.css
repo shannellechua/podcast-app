@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+.center {
+  text-align: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center; 
+  gap: 5px;
+  text-align: center;
+  justify-content: center;
+  padding-bottom: 10px;
+  /* border-bottom: 1px solid #4299e1; */
+}
 
 .podcasts-grid {
   display: grid;
@@ -36,7 +55,7 @@
 }
 
 /* Search form */
-form {
+.form {
   max-width: 600px;
   margin: 20px auto;
   padding: 20px;
