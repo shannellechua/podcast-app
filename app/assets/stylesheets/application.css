@@ -695,31 +695,22 @@ input[type="submit"]:hover {
 }
 
 .status.played {
-  background-color: #c6f6d5;
-  color: #2f855a;
+  background-color: #9AE6B4;
+  color: #276749;
 }
 
+
 .status.unplayed {
-  background-color: #fed7d7;
-  color: #c53030;
+  background-color: #FEB2B2; 
+  color: #9B2C2C; 
 }
 
 .status.finished {
-  background-color: #bee3f8;
-  color: #2c5282;
+  background-color: #90CDF4; 
+  color: #2C5282; 
 }
 
 .status.unfinished {
-  background-color: #feebc8;
-  color: #9c4221;
-}
-
-.remove-button {
-  background-color: #fc8181;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  background-color: #FBD38D; 
+  color: #975A16; 
 }
