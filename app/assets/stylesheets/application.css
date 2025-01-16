@@ -157,6 +157,7 @@ input[type="submit"]:hover {
 .podcast-actions {
   display: flex;
   flex-direction: row;
+  gap: 5px;
   padding-bottom: 10px;
   border-bottom: 2px solid #edf2f7;
   margin-bottom: 10px;
@@ -335,6 +336,32 @@ input[type="submit"]:hover {
   margin: 10px 0;
 }
 
+/*Episodes*/
+.episode-list {
+  list-style-type: none;
+  
+}
+
+.episode-link {
+  display: inline-block;
+  padding: 12px;
+  margin: 6px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  background: #D5E0EC;
+  color: #5683B3;
+  width: 95%;
+}
+
+.episode-link:hover {
+  background: #B9CBDF;
+  color: #466F9B;
+}
+
 .feedback-form {
   margin-top: 30px;
   padding: 15px;
@@ -353,6 +380,10 @@ input[type="submit"]:hover {
   margin-top: 5px;
   border-radius: 4px;
   border: 1px solid #ccc;
+}
+
+.comment-textarea {
+  width: 98%;
 }
 
 .submit-button {
@@ -440,4 +471,57 @@ input[type="submit"]:hover {
 
 p, div, h1, h2, h3, h4, h5, h6 {
   margin: 8px 0px 8px;
+}
+
+.flash-messages {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 90%;
+  max-width: 600px;
+}
+
+.flash-message {
+  padding: 12px 24px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  text-align: center;
+  animation: slideIn 0.5s ease-out,
+             fadeOut 0.5s ease-out 3s forwards;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flash-message.notice {
+  background-color: #90CDF4; /* light blue */
+  color: #2C5282; /* dark blue */
+  border: 1px solid #4299e1;
+}
+
+.flash-message.alert {
+  background-color: #FEB2B2; /* light red */
+  color: #9B2C2C; /* dark red */
+  border: 1px solid #F56565;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }

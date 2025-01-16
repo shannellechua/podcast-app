@@ -19,45 +19,75 @@ class PodcastsController < ApplicationController
   end
 
   def favorite
-    @episode = RSpotify::Episode.find(params[:episode_id])  
-    current_user.episodes.create(spotify_id: @episode.id, name: @episode.name, show: @episode.show.name)
-    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode added to favorites!')
+    begin
+      @episode = RSpotify::Episode.find(params[:episode_id])
+      if @episode
+        current_user.episodes.create(
+          spotify_id: @episode.id,
+          name: @episode.name,
+          show: @episode.show.name
+        )
+        flash[:notice] = 'Episode added to favorites!'
+        redirect_to podcasts_path
+      else
+        flash[:alert] = 'Episode not found'
+        redirect_to podcasts_path
+      end
+    rescue RSpotify::Error => e
+      flash[:alert] = 'Could not add episode to favorites'
+      redirect_to podcasts_path
+    end
   end
   
   def unfavorite
-    @episode = RSpotify::Episode.find(params[:id])
-    episode = current_user.episodes.find_by(spotify_id: @episode.id)
-    episode.destroy if episode
-    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode removed from favorites!')
+    episode = current_user.episodes.find_by(spotify_id: params[:id])
+    if episode&.destroy
+      flash[:notice] = 'Episode removed from favorites'
+    else
+      flash[:alert] = 'Could not remove episode from favorites'
+    end
+    redirect_back(fallback_location: podcasts_path)
   end
 
   def played
-    @episode = RSpotify::Episode.find(params[:id])
-    episode_favorite = current_user.episodes.find_by(spotify_id: @episode.id)
-    episode_favorite.update(played: true) if episode_favorite
-    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode marked as played!')
+    episode = current_user.episodes.find_by(spotify_id: params[:id])
+    if episode.update(played: true)
+      flash[:notice] = 'Episode marked as played'
+    else
+      flash[:alert] = 'Could not update episode status'
+    end
+    redirect_back(fallback_location: podcasts_path)
   end
   
   def unplayed
-    @episode = RSpotify::Episode.find(params[:id])
-    episode_favorite = current_user.episodes.find_by(spotify_id: @episode.id)
-    episode_favorite.update(played: false) if episode_favorite
-    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode marked as unplayed!')
+    episode = current_user.episodes.find_by(spotify_id: params[:id])
+    if episode.update(played: false)
+      flash[:notice] = 'Episode marked as unplayed'
+    else
+      flash[:alert] = 'Could not update episode status'
+    end
+    redirect_back(fallback_location: podcasts_path)
   end
 
   def finished
-    @episode = RSpotify::Episode.find(params[:id])
-    episode_favorite = current_user.episodes.find_by(spotify_id: @episode.id)
-    episode_favorite.update(finished: true) if episode_favorite
-    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode marked as finished!')
-   end
+    episode = current_user.episodes.find_by(spotify_id: params[:id])
+    if episode.update(finished: true)
+      flash[:notice] = 'Episode marked as finished'
+    else
+      flash[:alert] = 'Could not update episode status'
+    end
+    redirect_back(fallback_location: podcasts_path)
+  end
    
-   def unfinished
-    @episode = RSpotify::Episode.find(params[:id]) 
-    episode_favorite = current_user.episodes.find_by(spotify_id: @episode.id)
-    episode_favorite.update(finished: false) if episode_favorite
-    redirect_back(fallback_location: podcast_path(@episode), notice: 'Episode marked as unfinished!')
-   end
+  def unfinished
+    episode = current_user.episodes.find_by(spotify_id: params[:id])
+    if episode.update(finished: false)
+      flash[:notice] = 'Episode marked as unfinished'
+    else
+      flash[:alert] = 'Could not update episode status'
+    end
+    redirect_back(fallback_location: podcasts_path)
+  end
 
   private
 
