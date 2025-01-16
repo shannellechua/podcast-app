@@ -89,10 +89,23 @@
   </div>
 
   <div class="episode-info">
+<<<<<<< HEAD
+    <h2>Show Name: <span><%= @episode.show.name %></span></h2>
+=======
+>>>>>>> main
     <h2>Language: <span><%= I18nData.languages[@episode.language.upcase] %></span></h2>
     <h2>Description:</h2>
     <p><%= @episode.description %></p>
     <h2>Release Date: <span><%= @episode.release_date %></span></h2>
+    <h2>Episodes:</h2>
+    <ul>
+      <% @episode.show.episodes.each do |episode| %>
+        <li>
+          <%= link_to episode.name, podcast_path(id: episode.id), class: "episode-link" %>
+        </li>
+      <% end %>
+    </ul>
+
   </div>
 
   <div class="feedback-form">
