@@ -30,7 +30,7 @@
           <%= button_to 'Remove from Favorites', 
                       unfavorite_podcast_path(id: episode.spotify_id), 
                       method: :delete,
-                      class: 'remove-button',
+                      class: 'button',
                       form: { data: { turbo_confirm: 'Are you sure?' } } %>
         </div>
       </div>
