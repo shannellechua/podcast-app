@@ -2,22 +2,27 @@ Rails.application.routes.draw do
   devise_for :users
   get "dashboard/index"
 
+  # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/*
+  # PWA dynamic routes
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  # Defines the root path route ("/")
+  # Root route
   root "podcasts#search"
 
+  # Podcasts search route
   get "/podcasts", to: "podcasts#search"
 
+  # Podcasts resources
   resources :podcasts do
+    # Custom collection routes
     collection do
-      get :search  # Keeps your existing search route
+      get :search
     end
 
+    # Custom member routes
     member do
       post :favorite  
       delete :unfavorite
@@ -26,8 +31,8 @@ Rails.application.routes.draw do
       patch :finished
       patch :unfinished
     end
-    
-    resources :feedbacks
-  # Nests feedbacks under podcasts
+
+    # Nested feedbacks resource
+    resources :feedbacks, only: [:create, :edit, :update, :destroy] # Restrict to necessary actions
   end
 end

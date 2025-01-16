@@ -90,20 +90,39 @@
       <p class="text-sm text-gray-600 mb-4">Commenting as: <span class="font-medium"><%= current_user.email %></span></p>
     <% end %>
     
-    <%= form_with(model: [:podcast, @feedback], url: podcast_feedbacks_path(@episode.id), local: true, class: "space-y-4") do |f| %>
+    <%= form_with(model: @feedback, 
+              url: podcast_feedbacks_path(@episode.id), 
+              local: true, 
+              data: { turbo: false }, 
+              class: "space-y-4") do |f| %>
+      <%= f.hidden_field :podcast_id, value: @episode.id %>
+      <%= f.hidden_field :rating, id: 'rating-input' %>
       <div>
-        <%= f.label :rating, class: "block text-sm font-medium text-gray-700 mb-1" %>
-        <%= f.number_field :rating, in: 1..5, class: "block w-full mt-1" %>
-      </div>
-      <div>
-        <%= f.label :comment, class: "block text-sm font-medium text-gray-700 mb-1" %>
-        <%= f.text_area :comment, rows: 4, class: "block w-full mt-1" %>
-      </div>
-      <div>
-        <%= f.submit "Submit Feedback", class: "bg-indigo-600 text-white px-4 py-2 rounded-md" %>
-      </div>
-    <% end %>
+    <%= f.label :rating, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <div class="flex items-center space-x-1" id="star-rating">
+      <% 5.times do |i| %>
+        <button type="button"
+                data-rating="<%= i + 1 %>"
+                class="text-2xl text-gray-300 hover:text-yellow-400 focus:outline-none transition-colors star-button">
+          ★
+        </button>
+      <% end %>
+    </div>
   </div>
+
+  <div>
+    <%= f.label :comment, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.text_area :comment, 
+                    rows: 4, 
+                    required: true, 
+                    class: "block w-full mt-1 rounded-md border-gray-300 shadow-sm" %>
+  </div>
+
+  <div>
+    <%= f.submit "Submit Feedback", 
+                 class: "w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md transition-colors" %>
+  </div>
+<% end %>
 
   <!-- Existing Feedbacks -->
   <div class="bg-white rounded-lg shadow-sm p-6">
@@ -131,3 +150,42 @@
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const starRating = document.getElementById('star-rating');
+  const ratingInput = document.getElementById('rating-input');
+  const stars = starRating.getElementsByClassName('star-button');
+
+  function setRating(rating) {
+    ratingInput.value = rating;
+    Array.from(stars).forEach((star, index) => {
+      star.classList.toggle('text-yellow-400', index < rating);
+      star.classList.toggle('text-gray-300', index >= rating);
+    });
+  }
+
+  Array.from(stars).forEach(star => {
+    star.addEventListener('click', function() {
+      const rating = parseInt(this.dataset.rating);
+      setRating(rating);
+    });
+
+    star.addEventListener('mouseover', function() {
+      const rating = parseInt(this.dataset.rating);
+      Array.from(stars).forEach((s, index) => {
+        s.classList.toggle('text-yellow-400', index < rating);
+        s.classList.toggle('text-gray-300', index >= rating);
+      });
+    });
+
+    star.addEventListener('mouseout', function() {
+      const currentRating = parseInt(ratingInput.value) || 0;
+      Array.from(stars).forEach((s, index) => {
+        s.classList.toggle('text-yellow-400', index < currentRating);
+        s.classList.toggle('text-gray-300', index >= currentRating);
+      });
+    });
+  });
+});
+</script>

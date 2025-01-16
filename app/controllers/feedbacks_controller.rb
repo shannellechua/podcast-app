@@ -3,13 +3,15 @@ class FeedbacksController < ApplicationController
   before_action :set_episode, only: [:create, :edit, :update]
   
   def create
-    @feedback = Feedback.new(feedback_params.merge(podcast_id: params[:podcast_id]))
+    @feedback = Feedback.new(feedback_params)
     
     if @feedback.save
       redirect_to podcast_path(@feedback.podcast_id), notice: 'Feedback submitted successfully!'
     else
       @feedbacks = Feedback.where(podcast_id: params[:podcast_id])
+      logger.debug "Feedback save failed: #{@feedback.errors.full_messages}"
       render 'podcasts/show', status: :unprocessable_entity
+      
     end
   end
 
@@ -41,16 +43,18 @@ class FeedbacksController < ApplicationController
   def set_episode
     podcast_id = params[:podcast_id] || @feedback&.podcast_id
     if podcast_id.present?
-      @episode = RSpotify::Episode.find(podcast_id)
+      begin
+        @episode = RSpotify::Episode.find(podcast_id)
+      rescue RestClient::NotFound => e
+        logger.error "Episode not found: #{e.message}"
+        redirect_to podcasts_path, alert: 'Episode not found.'
+      end
     else
       redirect_to podcasts_path, alert: 'Podcast ID is missing or invalid.'
     end
-  rescue RestClient::NotFound
-    redirect_to podcasts_path, alert: 'Episode not found.'
   end
 
   def feedback_params
-    # Remove the merge since we're handling podcast_id separately
     params.require(:feedback).permit(:rating, :comment, :podcast_id)
   end
 end
