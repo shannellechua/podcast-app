@@ -33,4 +33,5 @@ Rails.application.routes.draw do
 
   resources :subscriptions
   get 'favorites', to: 'users#favorites', as: 'user_favorites'
+  get 'subscription', to: 'users#subscriptions', as: 'user_subscriptions'
 end
