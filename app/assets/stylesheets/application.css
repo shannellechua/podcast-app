@@ -30,6 +30,24 @@
 .user-info a:hover {
   color: #2d3748;
 }
+/*Login container*/
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-input {
+  width: 92%;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin: 10px 0;
+}
 
 .podcasts-grid {
   display: grid;
@@ -174,7 +192,6 @@ input[type="submit"]:hover {
 
 .field label {
   display: block;
-  margin-bottom: 8px;
   font-weight: 500;
   color: #4a5568;
 }
@@ -284,7 +301,6 @@ input[type="submit"]:hover {
 }
 
 .podcast-details {
-  font-family: Arial, sans-serif;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
