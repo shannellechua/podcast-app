@@ -1,29 +1,29 @@
 <div class="favorites-container">
-  <h1>My Favorites</h1>
+  <h1 class="align">My Favorites</h1>
   
   <div class="podcasts-grid">
     <% @favorite_episodes.each do |episode| %>
       <div class="podcast-card">
+        <div class="episode-status">
+          <% if episode.played %>
+            <span class="status played">Played</span>
+          <% else %>
+            <span class="status unplayed">Not Played</span>
+          <% end %>
+          
+          <% if episode.finished %>
+            <span class="status finished">Finished</span>
+          <% else %>
+            <span class="status unfinished">Not Finished</span>
+          <% end %>
+        </div>
+
         <h2 class="podcast-title">
           <%= link_to episode.name, podcast_path(episode.spotify_id) %>
         </h2>
         
-        <div class="episode-info">
+        <div>
           <p class="show-name">Show: <%= episode.show %></p>
-          
-          <div class="episode-status">
-            <% if episode.played %>
-              <span class="status played">Played</span>
-            <% else %>
-              <span class="status unplayed">Not Played</span>
-            <% end %>
-            
-            <% if episode.finished %>
-              <span class="status finished">Finished</span>
-            <% else %>
-              <span class="status unfinished">Not Finished</span>
-            <% end %>
-          </div>
         </div>
 
         <div class="episode-actions">
