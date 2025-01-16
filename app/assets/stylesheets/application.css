@@ -355,6 +355,10 @@ input[type="submit"]:hover {
   border: 1px solid #ccc;
 }
 
+.comment-textarea {
+  width: 98%;
+}
+
 .submit-button {
   background-color: #28a745;
   color: #fff;
