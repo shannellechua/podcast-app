@@ -336,6 +336,32 @@ input[type="submit"]:hover {
   margin: 10px 0;
 }
 
+/*Episodes*/
+.episode-list {
+  list-style-type: none;
+  
+}
+
+.episode-link {
+  display: inline-block;
+  padding: 12px;
+  margin: 6px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  background: #D5E0EC;
+  color: #5683B3;
+  width: 95%;
+}
+
+.episode-link:hover {
+  background: #B9CBDF;
+  color: #466F9B;
+}
+
 .feedback-form {
   margin-top: 30px;
   padding: 15px;
