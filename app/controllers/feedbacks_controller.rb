@@ -3,7 +3,7 @@ class FeedbacksController < ApplicationController
   before_action :set_episode, only: [:create, :edit, :update]
   
   def create
-    @feedback = Feedback.new(feedback_params)
+    @feedback = Feedback.new(feedback_params.merge(user_id: current_user.id))
     
     if @feedback.save
       redirect_to podcast_path(@feedback.podcast_id), notice: 'Feedback submitted successfully!'

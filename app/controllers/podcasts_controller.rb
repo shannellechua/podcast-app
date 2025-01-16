@@ -15,7 +15,7 @@ class PodcastsController < ApplicationController
   def show
     @episode = RSpotify::Episode.find(params[:id])
     @feedback = Feedback.new
-    @feedbacks = Feedback.where(podcast_id: params[:id])  # To display all feedbacks
+    @feedbacks = Feedback.includes(:user).where(podcast_id: params[:id])  # To display all feedbacks
   end
 
   def favorite

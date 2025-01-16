@@ -137,6 +137,9 @@
             <div class="text-yellow-400">
               <% feedback.rating.times do %>★<% end %><% (5 - feedback.rating).times do %>☆<% end %>
             </div>
+            <div>
+            <p class="text-sm text-gray-500">Commented by: <%= feedback.user&.email || "Fish" %></p>
+            </div>
           </div>
           <p class="text-gray-700 mb-3"><%= feedback.comment %></p>
           <div class="flex gap-2">
