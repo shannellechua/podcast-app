@@ -90,7 +90,7 @@
     <h2>Description:</h2>
     <p><%= @episode.description %></p>
     <h2>Release Date: <span><%= @episode.release_date %></span></h2>
-    <h2>Episodes:</h2>
+    <h2>Similar Episodes</h2>
     <ul class="episode-list">
       <% @episode.show.episodes.take(5).each do |episode| %>
         <li>
@@ -128,7 +128,7 @@
           <% feedback.rating.times do %>★<% end %><% (5 - feedback.rating).times do %>☆<% end %>
         </div>
         <p><strong>Commented by: <%= feedback.user&.email || "Anon" %></p>
-        <p><strong>Comment:</strong> <%= feedback.comment %></p>
+        <p>Comment: <%= feedback.comment %></p>
         <div class="feedback-actions">
           <%= link_to 'Edit', edit_podcast_feedback_path(@episode.id, feedback), class: 'button edit-button' %>
           <%= button_to 'Delete', podcast_feedback_path(@episode.id, feedback), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'button delete-button' %>
