@@ -23,7 +23,7 @@
     <% if user_signed_in? %>
       <% subscription = current_user.subscriptions.find_by(show_id: @episode.show.id) %>
       <% if subscription %>
-        <%= button_to "Unsubscribe", subscription_path(subscription), method: :delete, class: "unsubscribe-button", data: { confirm: "Are you sure you want to unsubscribe from #{subscription.show_name}?" } %>
+        <%= button_to "Unsubscribe", subscription_path(subscription), method: :delete, class: "button", data: { confirm: "Are you sure you want to unsubscribe from #{subscription.show_name}?" } %>
       <% else %>
         <%= button_to "Subscribe", subscriptions_path(show_id: @episode.show.id, show_name: @episode.show.name), method: :post, class: "button" %>
       <% end %>
