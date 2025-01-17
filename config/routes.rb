@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       patch :unfinished
     end
     
-    resources :feedbacks
+    resources :feedbacks, only: [:create, :edit, :update, :destroy]
   # Nests feedbacks under podcasts
   end
 
