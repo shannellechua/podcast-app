@@ -90,7 +90,7 @@
     <h2>Description:</h2>
     <p><%= @episode.description %></p>
     <h2>Release Date: <span><%= @episode.release_date %></span></h2>
-    <h2>Episodes:</h2>
+    <h2>Similar Episodes</h2>
     <ul class="episode-list">
       <% @episode.show.episodes.take(5).each do |episode| %>
         <li>
@@ -106,7 +106,7 @@
       <p class="current-user">Commenting as: <span><%= current_user.email %></span></p>
     <% end %>
 
-    <%= form_with(model: [:podcast, @feedback], url: podcast_feedbacks_path(@episode.id), local: true, class: "feedback-form") do |f| %>
+    <%= form_with(model: @feedback, url: podcast_feedbacks_path(@episode.id), local: true, class: "feedback-form") do |f| %>
       <div class="form-group">
         <%= f.label :rating %>
         <%= f.select :rating, options_for_select(1..5), class: "rating-select" %>
@@ -124,11 +124,14 @@
     <h3>Feedback</h3>
     <% @feedbacks.each do |feedback| %>
       <div class="feedback-item">
-        <p><strong>Rating:</strong> <%= feedback.rating %>/5</p>
-        <p><strong>Comment:</strong> <%= feedback.comment %></p>
+        <div>
+          <% feedback.rating.times do %>★<% end %><% (5 - feedback.rating).times do %>☆<% end %>
+        </div>
+        <p><strong>Commented by: <%= feedback.user&.email || "Anon" %></p>
+        <p>Comment: <%= feedback.comment %></p>
         <div class="feedback-actions">
           <%= link_to 'Edit', edit_podcast_feedback_path(@episode.id, feedback), class: 'button edit-button' %>
-          <%= link_to 'Delete', podcast_feedback_path(@episode.id, feedback), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'button delete-button' %>
+          <%= button_to 'Delete', podcast_feedback_path(@episode.id, feedback), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'button delete-button' %>
         </div>
       </div>
     <% end %>
